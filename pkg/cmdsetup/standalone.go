@@ -93,7 +93,7 @@ func newStandaloneCmd(runners ...run.Unit) *cobra.Command {
 			if err != nil {
 				return err
 			}
-			logger.GetLogger().Info().Msg("starting as a standalone server")
+			logger.GetLogger().Info().Msg("hey starting as a standalone server")
 			// Spawn our go routines and wait for shutdown.
 			if err := standaloneGroup.Run(context.WithValue(context.Background(), common.ContextNodeKey, nodeID)); err != nil {
 				logger.GetLogger().Error().Err(err).Stack().Str("name", standaloneGroup.Name()).Msg("Exit")

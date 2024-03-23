@@ -129,6 +129,7 @@ func NewGroup(name string) Group {
 	return Group{
 		name:    name,
 		readyCh: make(chan struct{}),
+		log:     logger.GetLogger(name),
 	}
 }
 
