@@ -414,7 +414,7 @@ func (g *Group) Run(ctx context.Context) (err error) {
 		if s == nil {
 			continue
 		}
-
+		g.log.Debug().Msg("hey" + s.Name())
 		g.log.Debug().Uint32("total", uint32(len(g.s))).Uint32("ran", uint32(idx+1)).Str("name", s.Name()).Msg("serve")
 		g.r.Add(func() error {
 			notify := s.Serve()
