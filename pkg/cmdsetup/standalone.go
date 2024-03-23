@@ -46,6 +46,7 @@ func newStandaloneCmd(runners ...run.Unit) *cobra.Command {
 		l.Fatal().Err(err).Msg("failed to initiate metadata service")
 	}
 	streamSvc, err := stream.NewService(ctx, metaSvc, pipeline)
+	l.Log().Msg("stream service initiated")
 	if err != nil {
 		l.Fatal().Err(err).Msg("failed to initiate stream service")
 	}
