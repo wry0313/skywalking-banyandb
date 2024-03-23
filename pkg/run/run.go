@@ -346,6 +346,7 @@ func (g *Group) RunConfig() (interrupted bool, err error) {
 //
 //nolint:contextcheck
 func (g *Group) Run(ctx context.Context) (err error) {
+	g.log.Debug().Msg("run lol")
 	// run config registration and flag parsing stages
 	if interrupted, errRun := g.RunConfig(); interrupted || errRun != nil {
 		return errRun

@@ -46,18 +46,20 @@ func newStandaloneCmd(runners ...run.Unit) *cobra.Command {
 		l.Fatal().Err(err).Msg("failed to initiate metadata service")
 	}
 	streamSvc, err := stream.NewService(ctx, metaSvc, pipeline)
-	l.Log().Msg("stream service initiated")
 	if err != nil {
 		l.Fatal().Err(err).Msg("failed to initiate stream service")
 	}
+	l.Debug().Msg("stream service initiated")
 	measureSvc, err := measure.NewService(ctx, metaSvc, pipeline)
 	if err != nil {
 		l.Fatal().Err(err).Msg("failed to initiate measure service")
 	}
+	l.Debug().Msg("measure service initiated")
 	q, err := query.NewService(ctx, streamSvc, measureSvc, metaSvc, pipeline)
 	if err != nil {
 		l.Fatal().Err(err).Msg("failed to initiate query processor")
 	}
+	l.Debug().Msg("query processor initiated")
 	grpcServer := grpc.NewServer(ctx, pipeline, pipeline, metaSvc, grpc.NewLocalNodeRegistry())
 	profSvc := observability.NewProfService()
 	metricSvc := observability.NewMetricService()
