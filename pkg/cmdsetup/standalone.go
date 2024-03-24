@@ -19,6 +19,7 @@ package cmdsetup
 
 import (
 	"context"
+	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -38,7 +39,9 @@ import (
 )
 
 func newStandaloneCmd(runners ...run.Unit) *cobra.Command {
+	fmt.Println("GAVIN WANG")
 	l := logger.GetLogger("bootstrap")
+	
 	ctx := context.Background()
 	pipeline := queue.Local()
 	metaSvc, err := metadata.NewService(ctx)

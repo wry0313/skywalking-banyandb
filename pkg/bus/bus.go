@@ -252,6 +252,7 @@ func (b *Bus) Publish(topic Topic, message ...Message) (Future, error) {
 
 // Subscribe adds an MessageListener to be called when a message of a Topic is posted.
 func (b *Bus) Subscribe(topic Topic, listener MessageListener) error {
+	fmt.Println(listener)
 	if topic.id == "" {
 		return errTopicEmpty
 	}
