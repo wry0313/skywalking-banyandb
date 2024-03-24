@@ -21,6 +21,7 @@ package bus
 
 import (
 	"errors"
+	"fmt"
 	"io"
 	"sync"
 
@@ -270,6 +271,8 @@ func (b *Bus) Subscribe(topic Topic, listener MessageListener) error {
 		for {
 			c, ok := <-ch
 			if ok {
+				// print listener
+				fmt.Println(listener)
 				ret := listener.Rev(c.m)
 				if c.f == nil {
 					continue
