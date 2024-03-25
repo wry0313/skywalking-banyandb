@@ -98,10 +98,13 @@ func (p *streamQueryProcessor) Rev(message bus.Message) (resp bus.Message) {
 	}
 
 	plan, err := logical_stream.Analyze(context.TODO(), queryCriteria, meta, s)
+
 	if err != nil {
 		resp = bus.NewMessage(bus.MessageID(now), common.NewError("fail to analyze the query request for stream %s: %v", meta.GetName(), err))
 		return
 	}
+
+	fmt.Println("plan", plan.String())
 
 	if p.log.Debug().Enabled() {
 		p.log.Debug().Str("plan", plan.String()).Msg("query plan")
