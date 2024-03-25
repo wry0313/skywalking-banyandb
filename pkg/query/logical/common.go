@@ -18,6 +18,8 @@
 package logical
 
 import (
+	"fmt"
+
 	"github.com/pkg/errors"
 
 	modelv1 "github.com/apache/skywalking-banyandb/api/proto/banyandb/model/v1"
@@ -79,6 +81,7 @@ func (t *Tag) GetFamilyName() string {
 // ToTags converts a projection spec to Tag sets.
 func ToTags(projection *modelv1.TagProjection) [][]*Tag {
 	projTags := make([][]*Tag, len(projection.GetTagFamilies()))
+	fmt.Println("there are ", len(projection.GetTagFamilies()), " families")
 	for i, tagFamily := range projection.GetTagFamilies() {
 		var projTagInFamily []*Tag
 		for _, tagName := range tagFamily.GetTags() {

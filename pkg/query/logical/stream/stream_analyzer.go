@@ -53,7 +53,6 @@ func Analyze(_ context.Context, criteria *streamv1.QueryRequest, metadata *commo
 	plan := parseTags(criteria, metadata)
 	fmt.Printf("%# v", pretty.Formatter(plan))
 
-
 	// parse offset
 	plan = newOffset(plan, criteria.GetOffset())
 	fmt.Printf("%# v", pretty.Formatter(plan))
