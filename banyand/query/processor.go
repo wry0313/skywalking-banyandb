@@ -109,6 +109,7 @@ func (p *streamQueryProcessor) Rev(message bus.Message) (resp bus.Message) {
 	// }
 
 	entities, err := plan.(executor.StreamExecutable).Execute(executor.WithStreamExecutionContext(context.Background(), ec))
+	fmt.Println("entities", entities)
 	if err != nil {
 		p.log.Error().Err(err).RawJSON("req", logger.Proto(queryCriteria)).Msg("fail to execute the query plan")
 		resp = bus.NewMessage(bus.MessageID(now), common.NewError("execute the query plan for stream %s: %v", meta.GetName(), err))
