@@ -80,7 +80,7 @@ func (p *streamQueryProcessor) Rev(message bus.Message) (resp bus.Message) {
 	}
 
 	meta := queryCriteria.GetMetadata()
-	fmt.Println("belong to group " + meta.Group)
+	fmt.Println("meta name:  " + meta.Name)
 	ec, err := p.streamService.Stream(meta)
 	
 	if err != nil {
