@@ -104,9 +104,9 @@ func (p *streamQueryProcessor) Rev(message bus.Message) (resp bus.Message) {
 		return
 	}
 
-	// if p.log.Debug().Enabled() {
-	p.log.Debug().Str("plan", plan.String()).Msg("query plan")
-	// }
+	if p.log.Debug().Enabled() {
+		p.log.Debug().Str("plan", plan.String()).Msg("query plan")
+	}
 
 	entities, err := plan.(executor.StreamExecutable).Execute(executor.WithStreamExecutionContext(context.Background(), ec))
 	fmt.Println("entities", entities)
@@ -116,7 +116,11 @@ func (p *streamQueryProcessor) Rev(message bus.Message) (resp bus.Message) {
 		return
 	}
 
-	resp = bus.NewMessage(bus.MessageID(now), &streamv1.QueryResponse{Elements: entities})
+	resp = bus.NewMessage(bus.MessageID(now), &streamv1.QueryResponse{Elements: []*streamv1.Element{
+		{
+			ElementId: "1",
+		},
+	}})
 
 	return
 }
