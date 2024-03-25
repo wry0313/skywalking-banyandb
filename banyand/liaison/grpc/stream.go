@@ -19,6 +19,7 @@ package grpc
 
 import (
 	"context"
+	"fmt"
 	"io"
 	"time"
 
@@ -138,6 +139,7 @@ func (s *streamService) Write(stream streamv1.StreamService_WriteServer) error {
 var emptyStreamQueryResponse = &streamv1.QueryResponse{Elements: make([]*streamv1.Element, 0)}
 
 func (s *streamService) Query(_ context.Context, req *streamv1.QueryRequest) (*streamv1.QueryResponse, error) {
+	fmt.Println("Hellow you are here Query")
 	timeRange := req.GetTimeRange()
 	if timeRange == nil {
 		req.TimeRange = timestamp.DefaultTimeRange
