@@ -19,6 +19,7 @@ package query
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"go.uber.org/multierr"
@@ -66,6 +67,7 @@ type streamQueryProcessor struct {
 }
 
 func (p *streamQueryProcessor) Rev(message bus.Message) (resp bus.Message) {
+	fmt.Println("got a stream query")
 	now := time.Now().UnixNano()
 	queryCriteria, ok := message.Data().(*streamv1.QueryRequest)
 	if !ok {
