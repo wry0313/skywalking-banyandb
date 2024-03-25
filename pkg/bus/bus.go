@@ -21,7 +21,7 @@ package bus
 
 import (
 	"errors"
-	"fmt"
+	// "fmt"
 	"io"
 	"sync"
 
@@ -252,7 +252,7 @@ func (b *Bus) Publish(topic Topic, message ...Message) (Future, error) {
 
 // Subscribe adds an MessageListener to be called when a message of a Topic is posted.
 func (b *Bus) Subscribe(topic Topic, listener MessageListener) error {
-	fmt.Println(listener)
+	// fmt.Println(listener)
 	if topic.id == "" {
 		return errTopicEmpty
 	}
@@ -273,7 +273,7 @@ func (b *Bus) Subscribe(topic Topic, listener MessageListener) error {
 			c, ok := <-ch
 			if ok {
 				// print listener
-				fmt.Println(listener)
+				// fmt.Println(listener)
 				ret := listener.Rev(c.m)
 				if c.f == nil {
 					continue

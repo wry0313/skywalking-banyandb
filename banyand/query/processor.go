@@ -67,9 +67,10 @@ type streamQueryProcessor struct {
 }
 
 func (p *streamQueryProcessor) Rev(message bus.Message) (resp bus.Message) {
-	fmt.Println("got a stream query")
 	now := time.Now().UnixNano()
+	fmt.Println("got a stream query")
 	queryCriteria, ok := message.Data().(*streamv1.QueryRequest)
+	fmt.Println("offset", queryCriteria.GetOffset()) 
 	if !ok {
 		resp = bus.NewMessage(bus.MessageID(now), common.NewError("invalid event data type"))
 		return
