@@ -116,11 +116,7 @@ func (p *streamQueryProcessor) Rev(message bus.Message) (resp bus.Message) {
 		return
 	}
 
-	resp = bus.NewMessage(bus.MessageID(now), &streamv1.QueryResponse{Elements: []*streamv1.Element{
-		{
-			ElementId: "1",
-		},
-	}})
+	resp = bus.NewMessage(bus.MessageID(now), &streamv1.QueryResponse{Elements: entities})
 
 	return
 }
