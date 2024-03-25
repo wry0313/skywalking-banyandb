@@ -98,8 +98,10 @@ func (p *streamQueryProcessor) Rev(message bus.Message) (resp bus.Message) {
 	}
 
 	plan, err := logical_stream.Analyze(context.TODO(), queryCriteria, meta, s)
+	fmt.Println("PLAN")
 	fmt.Println(plan.String())
 	for _, child := range plan.Children() {
+		fmt.Println("Children")
 		fmt.Println(child.String())
 	}
 
