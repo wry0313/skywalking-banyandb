@@ -26,6 +26,7 @@ import (
 	streamv1 "github.com/apache/skywalking-banyandb/api/proto/banyandb/stream/v1"
 	"github.com/apache/skywalking-banyandb/pkg/query/executor"
 	"github.com/apache/skywalking-banyandb/pkg/query/logical"
+	"github.com/kr/pretty"
 )
 
 const defaultLimit uint32 = 20
@@ -50,9 +51,12 @@ func BuildSchema(sm *databasev1.Stream, indexRules []*databasev1.IndexRule) (log
 func Analyze(_ context.Context, criteria *streamv1.QueryRequest, metadata *commonv1.Metadata, s logical.Schema) (logical.Plan, error) {
 	// parse fields
 	plan := parseTags(criteria, metadata)
+	fmt.Printf("%# v", pretty.Formatter(plan))
+
 
 	// parse offset
 	plan = newOffset(plan, criteria.GetOffset())
+	fmt.Printf("%# v", pretty.Formatter(plan))
 
 	// parse limit
 	limitParameter := criteria.GetLimit()
