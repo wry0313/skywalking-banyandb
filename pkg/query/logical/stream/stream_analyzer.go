@@ -69,7 +69,7 @@ func Analyze(_ context.Context, criteria *streamv1.QueryRequest, metadata *commo
 	if err != nil {
 		return nil, err
 	}
-	fmt.Printf("LOGICLA PLAN %# v", pretty.Formatter(p))	
+	// fmt.Printf("LOGICLA PLAN %# v", pretty.Formatter(p))	
 
 	rules := []logical.OptimizeRule{
 		logical.NewPushDownOrder(criteria.OrderBy),
@@ -79,7 +79,7 @@ func Analyze(_ context.Context, criteria *streamv1.QueryRequest, metadata *commo
 		return nil, err
 	}
 
-	fmt.Printf("OPTIMIZED LOGICAL PLAN %# v", pretty.Formatter(p))	
+	// fmt.Printf("OPTIMIZED LOGICAL PLAN %# v", pretty.Formatter(p))	
 	return p, nil
 }
 
