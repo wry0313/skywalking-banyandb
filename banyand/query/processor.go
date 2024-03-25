@@ -70,7 +70,7 @@ func (p *streamQueryProcessor) Rev(message bus.Message) (resp bus.Message) {
 	now := time.Now().UnixNano()
 	fmt.Println("got a stream query")
 	queryCriteria, ok := message.Data().(*streamv1.QueryRequest)
-	fmt.Println("offset", queryCriteria.GetOffset()) 
+	fmt.Println("offset", queryCriteria.GetOffset())
 	if !ok {
 		resp = bus.NewMessage(bus.MessageID(now), common.NewError("invalid event data type"))
 		return
@@ -82,7 +82,7 @@ func (p *streamQueryProcessor) Rev(message bus.Message) (resp bus.Message) {
 	meta := queryCriteria.GetMetadata()
 	fmt.Println("meta name:  " + meta.Name)
 	ec, err := p.streamService.Stream(meta)
-	
+
 	if err != nil {
 		resp = bus.NewMessage(bus.MessageID(now), common.NewError("fail to get execution context for stream %s: %v", meta.GetName(), err))
 		return
@@ -104,11 +104,9 @@ func (p *streamQueryProcessor) Rev(message bus.Message) (resp bus.Message) {
 		return
 	}
 
-	fmt.Println("plan", plan.String())
-
-	if p.log.Debug().Enabled() {
-		p.log.Debug().Str("plan", plan.String()).Msg("query plan")
-	}
+	// if p.log.Debug().Enabled() {
+	p.log.Debug().Str("plan", plan.String()).Msg("query plan")
+	// }
 
 	entities, err := plan.(executor.StreamExecutable).Execute(executor.WithStreamExecutionContext(context.Background(), ec))
 	if err != nil {
