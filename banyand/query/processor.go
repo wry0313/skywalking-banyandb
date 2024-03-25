@@ -80,6 +80,7 @@ func (p *streamQueryProcessor) Rev(message bus.Message) (resp bus.Message) {
 	}
 
 	meta := queryCriteria.GetMetadata()
+	fmt.Println("belong to group" + meta.Group)
 	ec, err := p.streamService.Stream(meta)
 	if err != nil {
 		resp = bus.NewMessage(bus.MessageID(now), common.NewError("fail to get execution context for stream %s: %v", meta.GetName(), err))
