@@ -58,7 +58,7 @@ type Query interface {
 // Stream allows inspecting elements' details.
 type Stream interface {
 	io.Closer
-	GetSchema() *databasev1.Stream
+GetSchema() *databasev1.Stream
 	GetIndexRules() []*databasev1.IndexRule
 	Query(ctx context.Context, opts pbv1.StreamQueryOptions) (pbv1.StreamQueryResult, error)
 	Sort(ctx context.Context, opts pbv1.StreamSortOptions) (pbv1.StreamSortResult, error)
