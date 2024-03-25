@@ -63,6 +63,7 @@ func Analyze(_ context.Context, criteria *streamv1.QueryRequest, metadata *commo
 		limitParameter = defaultLimit
 	}
 	plan = newLimit(plan, limitParameter)
+	fmt.Printf("%# v", pretty.Formatter(plan))
 
 	p, err := plan.Analyze(s)
 	if err != nil {
